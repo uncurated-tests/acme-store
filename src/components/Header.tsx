@@ -3,9 +3,18 @@ import { CartBadge } from "./CartBadge";
 
 interface HeaderProps {
   cartItemCount: number;
+  userName?: string;
+  onLogout: () => Promise<void>;
 }
 
-export function Header({ cartItemCount }: HeaderProps) {
+export function Header({ cartItemCount, userName, onLogout }: HeaderProps) {
+  const handleLogout = async () => {
+    await onLogout();
+  };
+
+  // Type error: assigning string to number
+  const displayCount: number = cartItemCount > 99 ? "99+" : cartItemCount;
+
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -19,11 +28,19 @@ export function Header({ cartItemCount }: HeaderProps) {
           >
             Products
           </Link>
+          {userName && (
+            <span className="text-gray-600">
+              Welcome, {userName.toUpperCase()}
+            </span>
+          )}
           <div className="relative">
-            <button className="text-gray-600 hover:text-gray-900 transition-colors">
+            <button 
+              onClick={handleLogout}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
               Cart
             </button>
-            <CartBadge count={cartItemCount} />
+            <CartBadge count={displayCount} />
           </div>
         </nav>
       </div>

@@ -1,8 +1,16 @@
-import { getProducts } from "@/lib/products";
+import { getProducts, getProductsByCategory } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 
 export default function ProductsPage() {
   const products = getProducts();
+  
+  // Type error: passing number instead of string
+  const toolProducts = getProductsByCategory(123);
+
+  const handleAddToCart = (id: number, qty: string) => {
+    // Type error: function signature doesn't match ProductCard's expected props
+    console.log(`Adding ${qty} of product ${id}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -16,7 +24,12 @@ export default function ProductsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard 
+              key={product.id} 
+              product={product} 
+              onAddToCart={handleAddToCart}
+              showDiscount={true}
+            />
           ))}
         </div>
       </div>
