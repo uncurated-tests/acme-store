@@ -4,12 +4,14 @@ import { CartBadge } from "./CartBadge";
 interface HeaderProps {
   cartItemCount: number;
   userName?: string;
-  onLogout: () => Promise<void>;
+  onLogout?: () => Promise<void>;
 }
 
 export function Header({ cartItemCount, userName, onLogout }: HeaderProps) {
   const handleLogout = async () => {
-    await onLogout();
+    if (onLogout) {
+      await onLogout();
+    }
   };
 
   // Type error: assigning string to number
