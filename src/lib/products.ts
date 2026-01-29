@@ -12,12 +12,13 @@ export type ProductCategory = "explosives" | "tools" | "vehicles";
 
 export const products: Product[] = [
   {
-    id: 1,  // Type error: should be string
+    id: "1",
     name: "Acme Rocket",
-    price: "999.99",  // Type error: should be number
+    price: 999.99,
     description: "The classic ACME rocket. Guaranteed to get you there fast.",
     image: "/products/rocket.svg",
-    // Missing inStock and category
+    inStock: true,
+    category: "vehicles",
   },
   {
     id: "2",
@@ -25,7 +26,7 @@ export const products: Product[] = [
     price: 149.99,
     description: "Heavy-duty anvil for all your coyote needs.",
     image: "/products/anvil.svg",
-    inStock: "yes",  // Type error: should be boolean
+    inStock: true,
     category: "tools",
   },
   {
@@ -35,7 +36,7 @@ export const products: Product[] = [
     description: "Explosive results every time. Handle with care.",
     image: "/products/tnt.svg",
     inStock: true,
-    category: "weapons",  // Type error: invalid category
+    category: "explosives",
   },
   {
     id: "4",
@@ -60,8 +61,7 @@ export function getProductsByCategory(category: string): Product[] {
   return products.filter((p) => p.category === category);
 }
 
-export function calculateDiscount(product: Product, discount: number): string {
-  // Type error: returning string but should return number based on usage
+export function calculateDiscount(product: Product, discount: number): number {
   const discountedPrice = product.price - (product.price * discount);
   return discountedPrice;
 }
