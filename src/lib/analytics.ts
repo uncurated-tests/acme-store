@@ -54,8 +54,15 @@ const calculateDuration = (session: UserSession): number => {
   return Date.now() - session.startTime.getTime();
 };
 
+// Engagement score result type
+export interface EngagementScore {
+  score: number;
+  tier: "low" | "medium" | "high";
+  recommendation: string;
+}
+
 // NEW: Advanced engagement scoring algorithm
-export const calculateEngagementScore = (session: UserSession): string => {
+export const calculateEngagementScore = (session: UserSession): EngagementScore => {
   const duration = calculateDuration(session);
   const eventCount = session.events.length;
   const pageViews = session.pageViews;
