@@ -11,7 +11,7 @@ import type { UserSession } from "@/lib/analytics";
  * beautiful visual feedback and gamification elements.
  */
 export function EngagementBadge() {
-  const [session, setSession] = useState<UserSession | null>(null);
+  const [session, setSession] = useState<UserSession>(null);
   const [engagement, setEngagement] = useState<ReturnType<typeof calculateEngagementScore> | null>(null);
 
   useEffect(() => {
