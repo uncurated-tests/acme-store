@@ -16,3 +16,6 @@ export { SearchModal } from "./SearchModal";
 
 // Engagement Components
 export { EngagementBadge } from "./EngagementBadge";
+
+// Comparison Components
+export { ProductComparison, useProductComparison } from "./ProductComparison";
